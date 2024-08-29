@@ -2,6 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Waterium.Controls.Window;component/Themes/ResizableWindow.xaml" />
+        <ResourceDictionary Source="/Waterium.Controls.Window;component/Themes/MinimizableWindow.xaml" />
     </ResourceDictionary.MergedDictionaries>
     
     
