@@ -9,6 +9,7 @@
 
     <ItemGroup>
       <None Remove="Assets\iconfont.ttf" />
+      <None Remove="Package.ps1" />
     </ItemGroup>
 
     <ItemGroup>
