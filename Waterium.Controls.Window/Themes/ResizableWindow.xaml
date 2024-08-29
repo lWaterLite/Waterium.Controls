@@ -1,0 +1,205 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Waterium.Controls.Window">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Waterium.Controls.Window;component/Themes/Colors/BasicTheme.xaml" />
+        <ResourceDictionary Source="/Waterium.Controls.Window;component/Themes/Colors/GradiantPanel.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <local:IconToVisibilityConverter x:Key="IconToVisibilityConverter" />
+
+    <FontFamily x:Key="Iconfont">/Waterium.Controls.Window;component/Assets/#iconfont</FontFamily>
+
+    <Style TargetType="{x:Type local:ResizableWindow}">
+        <Setter Property="Foreground" Value="{StaticResource Text-Primary}" />
+
+        <Setter Property="WindowChrome.WindowChrome">
+            <Setter.Value>
+                <WindowChrome CaptionHeight="30"
+                              GlassFrameThickness="1"
+                              NonClientFrameEdges="None"
+                              ResizeBorderThickness="5"
+                              UseAeroCaptionButtons="False" />
+            </Setter.Value>
+        </Setter>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Window}">
+                    <Border>
+                        <Grid x:Name="Layout">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <Border Grid.Row="0" Background="{StaticResource Background-Page}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <!--标题-->
+                                    <StackPanel Grid.Column="0"
+                                                Orientation="Horizontal">
+                                        <Image Width="{x:Static SystemParameters.SmallIconHeight}"
+                                               Height="{x:Static SystemParameters.SmallCaptionHeight}"
+                                               Margin="6 0 0 0"
+                                               Source="{TemplateBinding Icon}"
+                                               Visibility="{TemplateBinding Icon,
+                                                    Converter={StaticResource IconToVisibilityConverter}}"
+                                               WindowChrome.IsHitTestVisibleInChrome="True">
+                                        </Image>
+                                        <ContentControl HorizontalAlignment="Center"
+                                                        VerticalAlignment="Center"
+                                                        Margin="8 0 0 0"
+                                                        Content="{TemplateBinding Title}"
+                                                        FontSize="14"
+                                                        IsTabStop="False" />
+                                    </StackPanel>
+
+                                    <!--按钮-->
+                                    <StackPanel Grid.Column="2"
+                                                Orientation="Horizontal">
+                                        <!--Minimize-->
+                                        <Button FocusVisualStyle="{x:Null}"
+                                                WindowChrome.IsHitTestVisibleInChrome="True"
+                                                Command="{x:Static SystemCommands.MinimizeWindowCommand}">
+                                            <Button.Template>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border x:Name="Border" Background="Transparent" Padding="12 0"
+                                                            HorizontalAlignment="Center"
+                                                            VerticalAlignment="Stretch">
+                                                        <TextBlock FontFamily="{StaticResource Iconfont}"
+                                                                   HorizontalAlignment="Center"
+                                                                   VerticalAlignment="Center"
+                                                                   FontSize="16"
+                                                                   TextAlignment="Center"
+                                                                   IsHitTestVisible="True"
+                                                                   Foreground="{StaticResource Text-Primary}"
+                                                                   Text="&#xe65a;" />
+                                                    </Border>
+
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter TargetName="Border" Property="Background"
+                                                                    Value="{StaticResource Gray-900}" />
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Button.Template>
+                                        </Button>
+                                        <!-- Maximize -->
+                                        <Grid>
+                                            <Button FocusVisualStyle="{x:Null}"
+                                                    WindowChrome.IsHitTestVisibleInChrome="True"
+                                                    x:Name="MaximizeButton"
+                                                    Command="{x:Static SystemCommands.MaximizeWindowCommand}">
+                                                <Button.Template>
+                                                    <ControlTemplate TargetType="{x:Type Button}">
+                                                        <Border x:Name="Border" Background="Transparent" Padding="12 0"
+                                                                HorizontalAlignment="Center"
+                                                                VerticalAlignment="Stretch">
+                                                            <TextBlock FontFamily="{StaticResource Iconfont}"
+                                                                       HorizontalAlignment="Center"
+                                                                       VerticalAlignment="Center"
+                                                                       FontSize="16"
+                                                                       TextAlignment="Center"
+                                                                       IsHitTestVisible="True"
+                                                                       Foreground="{StaticResource Text-Primary}"
+                                                                       Text="&#xe65d;" />
+                                                        </Border>
+
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                <Setter TargetName="Border" Property="Background"
+                                                                        Value="{StaticResource Gray-900}" />
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Button.Template>
+                                            </Button>
+                                            <Button FocusVisualStyle="{x:Null}"
+                                                    x:Name="RestoreButton"
+                                                    Visibility="Collapsed"
+                                                    WindowChrome.IsHitTestVisibleInChrome="True"
+                                                    Command="{x:Static SystemCommands.RestoreWindowCommand}">
+                                                <Button.Template>
+                                                    <ControlTemplate TargetType="{x:Type Button}">
+                                                        <Border x:Name="Border" Background="Transparent" Padding="12 0"
+                                                                HorizontalAlignment="Center"
+                                                                VerticalAlignment="Stretch">
+                                                            <TextBlock FontFamily="{StaticResource Iconfont}"
+                                                                       HorizontalAlignment="Center"
+                                                                       VerticalAlignment="Center"
+                                                                       FontSize="16"
+                                                                       TextAlignment="Center"
+                                                                       IsHitTestVisible="True"
+                                                                       Foreground="{StaticResource Text-Primary}"
+                                                                       Text="&#xe693;" />
+                                                        </Border>
+
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                <Setter TargetName="Border" Property="Background"
+                                                                        Value="{StaticResource Background-Overlay}" />
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Button.Template>
+                                            </Button>
+                                        </Grid>
+                                        <!-- Close -->
+                                        <Button FocusVisualStyle="{x:Null}"
+                                                WindowChrome.IsHitTestVisibleInChrome="True"
+                                                Command="{x:Static SystemCommands.CloseWindowCommand}">
+                                            <Button.Template>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border x:Name="Border" Background="Transparent" Padding="12 0"
+                                                            HorizontalAlignment="Center"
+                                                            VerticalAlignment="Stretch">
+                                                        <TextBlock FontFamily="{StaticResource Iconfont}"
+                                                                   HorizontalAlignment="Center"
+                                                                   VerticalAlignment="Center"
+                                                                   FontSize="16"
+                                                                   TextAlignment="Center"
+                                                                   IsHitTestVisible="True"
+                                                                   Foreground="{StaticResource Text-Primary}"
+                                                                   Text="&#xe661;" />
+                                                    </Border>
+
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter TargetName="Border" Property="Background"
+                                                                    Value="{StaticResource Red-900}" />
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Button.Template>
+                                        </Button>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+
+                            <AdornerDecorator Grid.Row="1">
+                                <ContentControl Content="{TemplateBinding Content}"
+                                                HorizontalAlignment="Stretch"
+                                                VerticalAlignment="Stretch">
+                                </ContentControl>
+                            </AdornerDecorator>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="WindowState" Value="Maximized">
+                            <Setter TargetName="Layout" Property="Margin" Value="8" />
+                            <Setter TargetName="RestoreButton" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="MaximizeButton" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
